@@ -9,7 +9,7 @@ export default function Dashboard() {
     <div>
       <Routes>
         <Route exact path="/spiker" element={<Commentators />} />
-        <Route exact path="/macdet" element={<CommentatorMatchs />} />
+        <Route exact path="/mac" element={<CommentatorMatchs />} />
         <Route exact path="/macdetay" element={<Matchs />} />
       </Routes>
     </div>
