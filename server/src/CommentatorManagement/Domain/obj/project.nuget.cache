@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "w2f1Di2/XCEd8av0xsZSTZO6Vus6NS/gegIBTvOmOY+bHOe503ojr8eweY+p02FozVH6o+WzDtpKVQnzwmT4wA==",
+  "dgSpecHash": "zvB3Ha7iv91ICVNLKfiGiUkdgV4mscAk5CMeszEqkU9zuPBMRQuGjO5Tq5GatsRpk9wjnRWTX98o47RcjLrY9Q==",
   "success": true,
-  "projectFilePath": "C:\\Users\\riza_\\Desktop\\football-statistics-project\\server\\CommentatorManagement\\Domain\\Domain.csproj",
+  "projectFilePath": "C:\\Users\\riza_tire\\Desktop\\c-sharp\\commentator-management\\server\\src\\CommentatorManagement\\Domain\\Domain.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

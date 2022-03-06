@@ -12,7 +12,7 @@ export default function Navi() {
       RSUITE
     </Navbar.Brand>
     <Nav>
-      <Nav.Item icon={<EventDetail />}><Link to="/">Home</Link></Nav.Item>
+      <Nav.Item  as={Link} to="/" icon={<EventDetail />}>Home</Nav.Item>
       <Nav.Item>News</Nav.Item>
       <Nav.Item>Products</Nav.Item>
       <Dropdown title="About">

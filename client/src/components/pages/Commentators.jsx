@@ -1,10 +1,19 @@
-import React , {useEffect} from 'react'
+import React , {useEffect, useState} from 'react'
 import { useSelector,useDispatch } from 'react-redux';
-import { Table, FlexboxGrid, Button } from "rsuite";
-import { getCommentatorAsync,commentatorList } from '../../redux/reduce/commentatorSlice';
+import { Table, FlexboxGrid, Button ,Form,ButtonToolbar} from "rsuite";
+import { getCommentatorAsync,commentatorList, addCommentatorAsync } from '../../redux/reduce/commentatorSlice';
 export default function Commentators() {
   const dispatch = useDispatch()
   const getData = useSelector(commentatorList)
+  const [firstName,setFirstName] = useState("");
+  const [lastName,setLastName] = useState("");
+
+  const handleSubmit = async ()=>{
+    //e.preventDefault()
+    let com = {firstName: firstName,lastName:lastName}
+    await dispatch(addCommentatorAsync(com))
+    console.log(firstName,lastName);
+  }
 
   useEffect(() => {
     dispatch(getCommentatorAsync())
@@ -28,7 +37,25 @@ export default function Commentators() {
           </Table.Column>
         </Table>
       </FlexboxGrid>
-      <Button>Kayıt Ekle</Button>
+
+      <Form>
+    <Form.Group controlId="firstName">
+      <Form.ControlLabel>Adı</Form.ControlLabel>
+      <Form.Control  onChange={(e)=>setFirstName(e)} name="firstName" />
+    </Form.Group>
+    <Form.Group controlId="lastName">
+      <Form.ControlLabel>Soyadı</Form.ControlLabel>
+      <Form.Control onChange={(e)=>setLastName(e)} name="lastName" />
+    </Form.Group>
+    
+    
+    <Form.Group>
+      <ButtonToolbar>
+        <Button onClick={handleSubmit} appearance="primary">Ekle</Button>
+      </ButtonToolbar>
+    </Form.Group>
+  </Form>
+   
       </div>
   )
 }

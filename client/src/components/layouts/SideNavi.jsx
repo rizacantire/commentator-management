@@ -9,14 +9,15 @@ export default function SideNavi() {
       <Sidenav defaultOpenKeys={["3", "4"]} activeKey="1">
         <Sidenav.Body>
           <Nav>
-            <Nav.Item eventKey="1" icon={<Dashboard />}>
-              <Link to={"/commentators"}> Spikerler</Link>
+            <Nav.Item as={Link} to="/spiker"  eventKey="1" icon={<Dashboard />}>
+             
+           Spikerler
             </Nav.Item>
-            <Nav.Item eventKey="2" icon={<DoingRound />}>
-              Maçlar
+            <Nav.Item as={Link} to="/macdetay" eventKey="2" icon={<DoingRound />}>
+             Maç Detay
             </Nav.Item>
             <Dropdown eventKey="3" title="Advanced" icon={<Image />}>
-              <Dropdown.Item eventKey="3-1"><Link to={"/test"}>Geo</Link></Dropdown.Item>
+              <Dropdown.Item as={Link} to="/maclar" eventKey="3-1">Maçlar</Dropdown.Item>
               <Dropdown.Item eventKey="3-2">Devices</Dropdown.Item>
               <Dropdown.Item eventKey="3-3">Loyalty</Dropdown.Item>
               <Dropdown.Item eventKey="3-4">Visit Depth</Dropdown.Item>
