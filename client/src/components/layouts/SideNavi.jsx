@@ -25,7 +25,15 @@ export default function SideNavi() {
               <ListItemIcon>
                 <InboxIcon />
               </ListItemIcon>
-              <ListItemText primary="Maç" />
+              <ListItemText primary="Maç Detay" />
+            </ListItemButton>
+          </ListItem>
+          <ListItem disablePadding>
+            <ListItemButton component={RouterLink} to="/page">
+              <ListItemIcon>
+                <InboxIcon />
+              </ListItemIcon>
+              <ListItemText primary="page" />
             </ListItemButton>
           </ListItem>
         </List>

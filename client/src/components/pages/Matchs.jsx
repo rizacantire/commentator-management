@@ -5,17 +5,19 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
+import TablePagination from '@mui/material/TablePagination';
+
 import { useSelector, useDispatch } from "react-redux";
 import {
-  getCommentatorMatchAsync,
-  commentatorMatchList,
-} from "../../redux/reduce/commentatorMatchSlice";
+  getMatchsAsync,
+  matchList,
+} from "../../redux/reduce/matchSlice";
 
 export default function Matchs() {
   const dispatch = useDispatch();
-  const getData = useSelector(commentatorMatchList);
+  const getData = useSelector(matchList);
   useEffect(() => {
-    dispatch(getCommentatorMatchAsync());
+    dispatch(getMatchsAsync());
   }, [dispatch]);
   return (
     <div>
@@ -27,7 +29,7 @@ export default function Matchs() {
               <TableCell>Ev Sahibi</TableCell>
               <TableCell>Konuk Takım</TableCell>
               <TableCell>Skor</TableCell>
-              <TableCell>Anlatan</TableCell>
+              {/* <TableCell>Anlatan</TableCell> */}
             </TableRow>
           </TableHead>
           <TableBody>
@@ -36,10 +38,10 @@ export default function Matchs() {
                 <TableCell component="th" scope="row">
                   {data.id}
                 </TableCell>
-                <TableCell align="left">{data.match.homeName}</TableCell>
-                <TableCell align="left">{data.match.awayName}</TableCell>
-                <TableCell align="left">{data.match.homegoalcount} - {data.match.awaygoalcount}</TableCell>
-                <TableCell align="left">{data.commentator.firstName} {data.commentator.lastName}</TableCell>
+                <TableCell align="left">{data.homeId}</TableCell>
+                <TableCell align="left">{data.awayId}</TableCell>
+                <TableCell align="left">{data.season}</TableCell>
+                {/* <TableCell align="left">{data.commentator.firstName} {data.commentator.lastName}</TableCell> */}
               </TableRow>
             ))}
           </TableBody>

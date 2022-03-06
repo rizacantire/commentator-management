@@ -19,5 +19,8 @@ namespace Application.Models
         public int Homegoalcount { get; set; }
         public int Awaygoalcount { get; set; }
         public int Totalgoalcount { get; set; }
+        public int DateUnix { get; set; }
+        
+        
     }
 }
