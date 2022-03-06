@@ -1,25 +1,23 @@
 import "./App.css";
-import "rsuite/dist/rsuite.min.css";
 import React from "react";
-import Navi from "./components/layouts/Navi";
+import { Grid } from "@mui/material";
 import SideNavi from "./components/layouts/SideNavi";
-import { Grid, Row, Col } from "rsuite";
+import Header from "./components/layouts/Header"
 import Dashboard from "./components/layouts/Dashboard";
-
 function App() {
   return (
-    <div style={{ maxWidth: "1400px", margin: "auto" }}>
-      <Navi />
-      <Grid fluid style={{ marginLeft: "-5px" }}>
-        <Row>
-          <Col xs={4}>
-            <SideNavi />
-          </Col>
+    <div>
+      <Grid container spacing={2}>
+        <Grid item xs={12}>
+          <Header/>
+        </Grid>
 
-          <Col xs={20}>
-            <Dashboard />
-          </Col>
-        </Row>
+        <Grid item xs={3}>
+          <SideNavi/>
+        </Grid>
+        <Grid item xs={9}>
+          <Dashboard/>
+        </Grid>
       </Grid>
     </div>
   );

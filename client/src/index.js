@@ -6,12 +6,17 @@ import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import { store } from "./redux/store/store";
 import {Provider} from "react-redux"
+import { Container } from "@mui/material";
+
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       {" "}
      <Provider store={store}>
+     <Container maxWidth="lg">
      <App/>
+      </Container>
+     
      </Provider>
     </BrowserRouter>
   </React.StrictMode>,
