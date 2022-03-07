@@ -13,9 +13,7 @@ import {
   TablePagination,
   TableRow,
   Paper,
-  IconButton,
-  Select,
-  MenuItem,
+  IconButton,Select,MenuItem
 } from "@mui/material";
 import FirstPageIcon from "@mui/icons-material/FirstPage";
 import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
@@ -33,6 +31,9 @@ import {
 } from "../../redux/reduce/commentatorMatchSlice";
 import Selectable from "../filterPages/Selectable";
 export default function PaginationTable() {
+  const [value, setValue] = React.useState("");
+  const handleChange = event => setValue(event.target.value);
+  console.log(value);
   const dispatch = useDispatch();
   const getData = useSelector(matchList);
   const getCommentators = useSelector(commentatorList);
@@ -128,7 +129,12 @@ export default function PaginationTable() {
                   {checkCommentator(row.id) ? (
                     getCurrentCommentator(row.id)
                   ) : (
-                    <Selectable />
+                    <Select value={value} size={"small"} onChange={handleChange}>
+                    <MenuItem value="" > <em>None</em></MenuItem>
+                       {getCommentators.map((s) => (
+                        <MenuItem key={s.id} value={s.id}>{s.firstName} {s.lastName}</MenuItem>
+                      ))} 
+                    </Select>
                   )}
                 </TableCell>
                 <TableCell style={{ width: 160 }} align="left">
