@@ -1,91 +1,49 @@
 import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { useTheme } from "@mui/material/styles";
-import Box from "@mui/material/Box";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableFooter from "@mui/material/TableFooter";
-import TablePagination from "@mui/material/TablePagination";
-import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
-import IconButton from "@mui/material/IconButton";
+import {
+  Button,
+  TableHead,
+  Box,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableFooter,
+  TablePagination,
+  TableRow,
+  Paper,
+  IconButton,
+  Select,
+  MenuItem,
+} from "@mui/material";
 import FirstPageIcon from "@mui/icons-material/FirstPage";
 import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import LastPageIcon from "@mui/icons-material/LastPage";
-import TableHead from "@mui/material/TableHead";
-
 import { useSelector, useDispatch } from "react-redux";
 import { getMatchsAsync, matchList } from "../../redux/reduce/matchSlice";
+import {
+  commentatorList,
+  getCommentatorAsync,
+} from "../../redux/reduce/commentatorSlice";
+import {
+  getCommentatorMatchAsync,
+  commentatorMatchList,
+} from "../../redux/reduce/commentatorMatchSlice";
+import Selectable from "../filterPages/Selectable";
 export default function PaginationTable() {
   const dispatch = useDispatch();
   const getData = useSelector(matchList);
+  const getCommentators = useSelector(commentatorList);
+  const getCommentatorMatchs = useSelector(commentatorMatchList);
+  const items = [...getData].sort((a, b) => b.dateUnix - a.dateUnix);
+  // ↓ which means we're not manipulating state, but just our `items` array alone
   useEffect(() => {
     dispatch(getMatchsAsync());
+    dispatch(getCommentatorAsync());
+    dispatch(getCommentatorMatchAsync());
   }, [dispatch]);
-  function TablePaginationActions(props) {
-    const theme = useTheme();
-    const { count, page, rowsPerPage, onPageChange } = props;
-
-    const handleFirstPageButtonClick = (event) => {
-      onPageChange(event, 0);
-    };
-
-    const handleBackButtonClick = (event) => {
-      onPageChange(event, page - 1);
-    };
-
-    const handleNextButtonClick = (event) => {
-      onPageChange(event, page + 1);
-    };
-
-    const handleLastPageButtonClick = (event) => {
-      onPageChange(event, Math.max(0, Math.ceil(count / rowsPerPage) - 1));
-    };
-
-    return (
-      <Box sx={{ flexShrink: 0, ml: 2.5 }}>
-        <IconButton
-          onClick={handleFirstPageButtonClick}
-          disabled={page === 0}
-          aria-label="first page"
-        >
-          {theme.direction === "rtl" ? <LastPageIcon /> : <FirstPageIcon />}
-        </IconButton>
-        <IconButton
-          onClick={handleBackButtonClick}
-          disabled={page === 0}
-          aria-label="previous page"
-        >
-          {theme.direction === "rtl" ? (
-            <KeyboardArrowRight />
-          ) : (
-            <KeyboardArrowLeft />
-          )}
-        </IconButton>
-        <IconButton
-          onClick={handleNextButtonClick}
-          disabled={page >= Math.ceil(count / rowsPerPage) - 1}
-          aria-label="next page"
-        >
-          {theme.direction === "rtl" ? (
-            <KeyboardArrowLeft />
-          ) : (
-            <KeyboardArrowRight />
-          )}
-        </IconButton>
-        <IconButton
-          onClick={handleLastPageButtonClick}
-          disabled={page >= Math.ceil(count / rowsPerPage) - 1}
-          aria-label="last page"
-        >
-          {theme.direction === "rtl" ? <FirstPageIcon /> : <LastPageIcon />}
-        </IconButton>
-      </Box>
-    );
-  }
 
   TablePaginationActions.propTypes = {
     count: PropTypes.number.isRequired,
@@ -96,7 +54,7 @@ export default function PaginationTable() {
 
   //  .sort((a, b) => (a.calories < b.calories ? -1 : 1));
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
@@ -110,11 +68,25 @@ export default function PaginationTable() {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
+  function checkCommentator(id) {
+    return getCommentatorMatchs.find((r) => r.matchId === id) ? true : false;
+  }
+
+  function getCurrentCommentator(id) {
+    let res = getCommentatorMatchs.find((r) => r.matchId === id);
+    let returnItem = res.commentator.firstName + " " + res.commentator.lastName;
+    return returnItem;
+  }
+
   return (
     <div>
       {" "}
       <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 500 }} aria-label="custom pagination table">
+        <Table
+          size={"small"}
+          sx={{ minWidth: 500 }}
+          aria-label="custom pagination table"
+        >
           <TableHead>
             <TableRow>
               <TableCell>Sezon</TableCell>
@@ -123,26 +95,25 @@ export default function PaginationTable() {
               <TableCell>Ev Sahibi</TableCell>
               <TableCell>Konuk Takım</TableCell>
               <TableCell>Skor</TableCell>
-              {/* <TableCell>Anlatan</TableCell> */}
+              <TableCell>Anlatan</TableCell>
+              <TableCell>Ekle</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {(rowsPerPage > 0
-              ? getData.slice(
+              ? items.slice(
                   page * rowsPerPage,
                   page * rowsPerPage + rowsPerPage
                 )
-              : getData
+              : items
             ).map((row) => (
               <TableRow key={row.id}>
-                <TableCell style={{ width: 20 }} >
-                  {row.season}
-                </TableCell>
+                <TableCell style={{ width: 20 }}>{row.season}</TableCell>
                 <TableCell style={{ width: 20 }} align="left">
                   {row.gameWeek}
                 </TableCell>
                 <TableCell style={{ width: 20 }} align="left">
-                  {new Date(row.dateUnix*1000).toLocaleString()}
+                  {new Date(row.dateUnix * 1000).toLocaleString()}
                 </TableCell>
                 <TableCell style={{ width: 160 }} align="left">
                   {row.homeName}
@@ -153,7 +124,22 @@ export default function PaginationTable() {
                 <TableCell style={{ width: 160 }} align="left">
                   {row.homegoalcount} - {row.awaygoalcount}
                 </TableCell>
-
+                <TableCell style={{ width: 160 }} align="left">
+                  {checkCommentator(row.id) ? (
+                    getCurrentCommentator(row.id)
+                  ) : (
+                    <Selectable />
+                  )}
+                </TableCell>
+                <TableCell style={{ width: 160 }} align="left">
+                  {checkCommentator(row.id) ? (
+                    ""
+                  ) : (
+                    <Button size={"small"} variant="contained" color="success">
+                      Ekle
+                    </Button>
+                  )}
+                </TableCell>
               </TableRow>
             ))}
 
@@ -186,5 +172,67 @@ export default function PaginationTable() {
         </Table>
       </TableContainer>
     </div>
+  );
+}
+
+function TablePaginationActions(props) {
+  const theme = useTheme();
+  const { count, page, rowsPerPage, onPageChange } = props;
+
+  const handleFirstPageButtonClick = (event) => {
+    onPageChange(event, 0);
+  };
+
+  const handleBackButtonClick = (event) => {
+    onPageChange(event, page - 1);
+  };
+
+  const handleNextButtonClick = (event) => {
+    onPageChange(event, page + 1);
+  };
+
+  const handleLastPageButtonClick = (event) => {
+    onPageChange(event, Math.max(0, Math.ceil(count / rowsPerPage) - 1));
+  };
+
+  return (
+    <Box sx={{ flexShrink: 0, ml: 2.5 }}>
+      <IconButton
+        onClick={handleFirstPageButtonClick}
+        disabled={page === 0}
+        aria-label="first page"
+      >
+        {theme.direction === "rtl" ? <LastPageIcon /> : <FirstPageIcon />}
+      </IconButton>
+      <IconButton
+        onClick={handleBackButtonClick}
+        disabled={page === 0}
+        aria-label="previous page"
+      >
+        {theme.direction === "rtl" ? (
+          <KeyboardArrowRight />
+        ) : (
+          <KeyboardArrowLeft />
+        )}
+      </IconButton>
+      <IconButton
+        onClick={handleNextButtonClick}
+        disabled={page >= Math.ceil(count / rowsPerPage) - 1}
+        aria-label="next page"
+      >
+        {theme.direction === "rtl" ? (
+          <KeyboardArrowLeft />
+        ) : (
+          <KeyboardArrowRight />
+        )}
+      </IconButton>
+      <IconButton
+        onClick={handleLastPageButtonClick}
+        disabled={page >= Math.ceil(count / rowsPerPage) - 1}
+        aria-label="last page"
+      >
+        {theme.direction === "rtl" ? <FirstPageIcon /> : <LastPageIcon />}
+      </IconButton>
+    </Box>
   );
 }

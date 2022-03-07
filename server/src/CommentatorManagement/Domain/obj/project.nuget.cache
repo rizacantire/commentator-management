@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "PWb7F4FHYC8brY2thvjc5Xrg2ozHBvtOaS4FuxOke/4I+rknZcRHoCsiRP/8luSgzKeFG3midXcWJEdH0854qQ==",
+  "dgSpecHash": "zvB3Ha7iv91ICVNLKfiGiUkdgV4mscAk5CMeszEqkU9zuPBMRQuGjO5Tq5GatsRpk9wjnRWTX98o47RcjLrY9Q==",
   "success": true,
-  "projectFilePath": "C:\\Users\\riza_\\Desktop\\projects\\commentator-management\\server\\src\\CommentatorManagement\\Domain\\Domain.csproj",
+  "projectFilePath": "C:\\Users\\riza_tire\\Desktop\\c-sharp\\commentator-management\\server\\src\\CommentatorManagement\\Domain\\Domain.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }
