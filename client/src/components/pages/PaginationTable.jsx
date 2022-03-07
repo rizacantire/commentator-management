@@ -129,7 +129,7 @@ export default function PaginationTable() {
                   {checkCommentator(row.id) ? (
                     getCurrentCommentator(row.id)
                   ) : (
-                    <Select value={value} size={"small"} onChange={handleChange}>
+                    <Select defaultValue="" size={"small"} onChange={handleChange}>
                     <MenuItem value="" > <em>None</em></MenuItem>
                        {getCommentators.map((s) => (
                         <MenuItem key={s.id} value={s.id}>{s.firstName} {s.lastName}</MenuItem>
