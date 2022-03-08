@@ -11,7 +11,6 @@ namespace Domain.Entities
     {
         public int CommentatorId { get; set; }
         public Commentator Commentator { get; set; }
-       
         public int MatchId { get; set; }
         public Match Match { get; set; }
     }

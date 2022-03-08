@@ -13,6 +13,7 @@ export const matchSlice = createSlice({
     },
     extraReducers:{
         [getMatchsAsync.fulfilled]:(state,action)=>{
+           
             state.items = action.payload
         }
     }

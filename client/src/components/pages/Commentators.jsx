@@ -12,13 +12,11 @@ export default function Commentators() {
   const getData = useSelector(commentatorList)
   const [firstName,setFirstName] = useState("");
   const [lastName,setLastName] = useState("");
-  console.log(getData);
 
   const handleSubmit = async ()=>{
     //e.preventDefault()
     let com = {firstName: firstName,lastName:lastName}
     await dispatch(addCommentatorAsync(com))
-    console.log(firstName,lastName);
   }
 
   useEffect(() => {

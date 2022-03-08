@@ -20,6 +20,11 @@ export const commentatorSlice = createSlice({
         error:null
     },
     reducers:{
+        destroy:(state,action)=>{
+            const id = action.payload
+            const filtered = state.items.filter(item=>item.id !== id)
+            state.items = filtered
+        }
         //addCommentator:
     },
     extraReducers:{

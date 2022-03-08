@@ -14,6 +14,7 @@ namespace Application.Mappings
         public MappingProfile()
         {
             CreateMap<CommentatorMatch, AddCommentatorMatchDto>().ReverseMap();
+            CreateMap<AddCommentatorMatchDto,CommentatorMatch >().ReverseMap();
             CreateMap<Match, MatchDto>().ReverseMap();
             CreateMap<Match, MatchDto>();
 

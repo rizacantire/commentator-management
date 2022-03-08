@@ -22,5 +22,12 @@ namespace Infrastructure.Contracts.Services
             var list = base.GetAllAsync(includeStrings: includes);
             return list;
         }
+
+        public async Task RemoveAsyncById(int id)
+        {
+            var removeItem =await base.GetByIdAsync(id);
+            if(removeItem != null) await base.RemoveAsync(removeItem);
+
+        }
     }
 }

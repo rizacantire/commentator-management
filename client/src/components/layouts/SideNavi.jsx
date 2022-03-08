@@ -36,7 +36,16 @@ export default function SideNavi() {
               <ListItemText primary="page" />
             </ListItemButton>
           </ListItem>
+          <ListItem disablePadding>
+            <ListItemButton component={RouterLink} to="/istatistik">
+              <ListItemIcon>
+                <InboxIcon />
+              </ListItemIcon>
+              <ListItemText primary="İstatistik" />
+            </ListItemButton>
+          </ListItem>
         </List>
+        
       </nav>
     </div>
   );

@@ -11,5 +11,7 @@ namespace Application.Contracts.Services
     public interface ICommentatorMatchService : IServiceBase<CommentatorMatch>
     {
         Task<IReadOnlyList<CommentatorMatch>> GetAllDetails();
+        Task RemoveAsyncById(int id);
+
     }
 }

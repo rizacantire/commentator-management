@@ -15,9 +15,10 @@ namespace WebAPI.Controllers
         private readonly ICommentatorMatchService _commentatorMatchService;
         private readonly IMapper _mapper;
 
-        public CommentatorMatchsController(ICommentatorMatchService commentatorMatchService)
+        public CommentatorMatchsController(ICommentatorMatchService commentatorMatchService, IMapper mapper)
         {
             _commentatorMatchService = commentatorMatchService;
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -31,6 +32,14 @@ namespace WebAPI.Controllers
         {
             var result = _mapper.Map<CommentatorMatch>(commentatorMatch);
             return Ok(await _commentatorMatchService.AddAsync(result));
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var item = await _commentatorMatchService.GetByIdAsync(id);
+            var res = _commentatorMatchService.RemoveAsync(item);
+            return Ok(res);
         }
     }
 }

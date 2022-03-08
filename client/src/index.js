@@ -13,9 +13,9 @@ ReactDOM.render(
     <BrowserRouter>
       {" "}
      <Provider store={store}>
-     <Container maxWidth="lg">
-     <App/>
-      </Container>
+  
+     <App />
+   
      
      </Provider>
     </BrowserRouter>

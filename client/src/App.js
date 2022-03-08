@@ -6,16 +6,16 @@ import Header from "./components/layouts/Header"
 import Dashboard from "./components/layouts/Dashboard";
 function App() {
   return (
-    <div>
+    <div style={{maxWidth:"1600px",margin:"auto"}}>
       <Grid container spacing={2}>
         <Grid item xs={12}>
           <Header/>
         </Grid>
 
-        <Grid item xs={3}>
+        <Grid item xs={2}>
           <SideNavi/>
         </Grid>
-        <Grid item xs={9}>
+        <Grid item xs={10}>
           <Dashboard/>
         </Grid>
       </Grid>

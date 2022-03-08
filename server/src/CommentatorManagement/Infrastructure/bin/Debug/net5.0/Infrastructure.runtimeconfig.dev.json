@@ -1,8 +1,8 @@
 {
   "runtimeOptions": {
     "additionalProbingPaths": [
-      "C:\\Users\\riza_tire\\.dotnet\\store\\|arch|\\|tfm|",
-      "C:\\Users\\riza_tire\\.nuget\\packages"
+      "C:\\Users\\riza_\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\riza_\\.nuget\\packages"
     ]
   }
 }

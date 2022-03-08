@@ -13,7 +13,10 @@ import {
   TablePagination,
   TableRow,
   Paper,
-  IconButton,Select,MenuItem
+  IconButton,
+  Select,
+  MenuItem,
+  Link,
 } from "@mui/material";
 import FirstPageIcon from "@mui/icons-material/FirstPage";
 import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
@@ -28,22 +31,24 @@ import {
 import {
   getCommentatorMatchAsync,
   commentatorMatchList,
+  addCommentatorMatchAsync
 } from "../../redux/reduce/commentatorMatchSlice";
-import Selectable from "../filterPages/Selectable";
 export default function PaginationTable() {
   const [value, setValue] = React.useState("");
-  const handleChange = event => setValue(event.target.value);
-  console.log(value);
+  const [currentMatch, setCurrentMatch] = React.useState("");
+
+  const handleChange = (event) => setValue(event.target.value);
   const dispatch = useDispatch();
   const getData = useSelector(matchList);
   const getCommentators = useSelector(commentatorList);
   const getCommentatorMatchs = useSelector(commentatorMatchList);
   const items = [...getData].sort((a, b) => b.dateUnix - a.dateUnix);
   // ↓ which means we're not manipulating state, but just our `items` array alone
-  useEffect(() => {
-    dispatch(getMatchsAsync());
-    dispatch(getCommentatorAsync());
-    dispatch(getCommentatorMatchAsync());
+  useEffect( () => {
+   dispatch( getMatchsAsync());
+   dispatch( getCommentatorAsync());
+   dispatch( getCommentatorMatchAsync());
+   
   }, [dispatch]);
 
   TablePaginationActions.propTypes = {
@@ -75,17 +80,28 @@ export default function PaginationTable() {
 
   function getCurrentCommentator(id) {
     let res = getCommentatorMatchs.find((r) => r.matchId === id);
-    let returnItem = res.commentator.firstName + " " + res.commentator.lastName;
-    return returnItem;
+    try {
+      let returnItem = res.commentator.firstName + " " + res.commentator.lastName;
+      return returnItem;
+    } catch (error) {
+      console.log(error);
+    }
+   
   }
+  const handleAddCommentator =async (event)=> {
+    let addCommentatorMatch = {commentatorId: value,matchId:event }
+    //window.location.reload(false);
+    dispatch(await addCommentatorMatchAsync(addCommentatorMatch))
+  };
 
+  
   return (
-    <div>
+    <div >
       {" "}
-      <TableContainer component={Paper}>
-        <Table
+      <TableContainer  component={Paper}>
+        <Table style={{margin:"auto"}}
           size={"small"}
-          sx={{ minWidth: 500 }}
+          sx={{ maxWidth: 1000 }}
           aria-label="custom pagination table"
         >
           <TableHead>
@@ -122,28 +138,38 @@ export default function PaginationTable() {
                 <TableCell style={{ width: 160 }} align="left">
                   {row.awayName}
                 </TableCell>
-                <TableCell style={{ width: 160 }} align="left">
+                <TableCell style={{ width: 40 }} align="left">
                   {row.homegoalcount} - {row.awaygoalcount}
                 </TableCell>
-                <TableCell style={{ width: 160 }} align="left">
+                <TableCell align="left">
                   {checkCommentator(row.id) ? (
                     getCurrentCommentator(row.id)
                   ) : (
-                    <Select defaultValue="" size={"small"} onChange={handleChange}>
-                    <MenuItem value="" > <em>None</em></MenuItem>
-                       {getCommentators.map((s) => (
-                        <MenuItem key={s.id} value={s.id}>{s.firstName} {s.lastName}</MenuItem>
-                      ))} 
+                    <Select
+                      defaultValue=""
+                      size={"small"}
+                      onChange={handleChange}
+                    >
+                      <MenuItem value="">
+                        {" "}
+                        <em>None</em>
+                      </MenuItem>
+                      {getCommentators.map((s) => (
+                        <MenuItem key={s.id} value={s.id}>
+                          {s.firstName} {s.lastName}
+                        </MenuItem>
+                      ))}
                     </Select>
                   )}
                 </TableCell>
-                <TableCell style={{ width: 160 }} align="left">
+                <TableCell  align="left">
                   {checkCommentator(row.id) ? (
                     ""
                   ) : (
-                    <Button size={"small"} variant="contained" color="success">
+                    <Button onClick={()=>handleAddCommentator(row.id)} size={"small"} variant="contained" color="success" >
                       Ekle
-                    </Button>
+                    </Button> 
+                     
                   )}
                 </TableCell>
               </TableRow>
