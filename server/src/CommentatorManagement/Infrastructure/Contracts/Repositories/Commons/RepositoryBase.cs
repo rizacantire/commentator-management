@@ -93,6 +93,12 @@ namespace Infrastructure.Contracts.Repositories.Commons
             return await _dbContext.Set<T>().FindAsync(id);
         }
 
+        public T GetByDetailQuery(Expression<Func<T, bool>> predicate,string sqlQuery)
+        {
+            var result = _dbContext.Set<T>().FromSqlRaw(sqlQuery).Where(predicate).FirstOrDefault();
+           return result;
+        }
+
 
         public async Task<IReadOnlyList<T>> GetAllAsync(Expression<Func<T, bool>> predicate = null, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null, bool disableTracking = true, string includeString = null, params string[] includeStrings)
         {

@@ -17,6 +17,7 @@ namespace Application.Mappings
             CreateMap<AddCommentatorMatchDto,CommentatorMatch >().ReverseMap();
             CreateMap<Match, MatchDto>().ReverseMap();
             CreateMap<Match, MatchDto>();
+            CreateMap<CommentatorMatch, StatisticDto>().ReverseMap();
 
             CreateMap<Match, CommentatorMatchDto>().ReverseMap();
             CreateMap<CommentatorMatch, CommentatorMatchDto>().ReverseMap();

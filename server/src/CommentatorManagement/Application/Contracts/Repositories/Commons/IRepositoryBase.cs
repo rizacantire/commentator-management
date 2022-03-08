@@ -10,6 +10,7 @@ namespace Application.Contracts.Repositories.Commons
 {
     public interface IRepositoryBase<T> where T: BaseEntity
     {
+        T GetByDetailQuery(Expression<Func<T, bool>> predicate,string query);
         Task<IReadOnlyList<T>> GetAllAsync();
         Task<T> GetAsync(Expression<Func<T, bool>> predicate, params string[] includeStrings);
         Task<T> GetAsync(Expression<Func<T, bool>> predicate = null, string includeString = null, params string[] includeStrings);

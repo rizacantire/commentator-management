@@ -15,5 +15,7 @@ namespace Infrastructure.Contracts.Repositories
         public MatchRepository(Context dbContext) : base(dbContext)
         {
         }
+
+    
     }
 }

@@ -27,7 +27,10 @@ namespace Infrastructure.Contracts.Services.Commons
         {
             await _repository.AddRangeAsync(entities);
         }
-      
+        public T GetByDetailQuery(Expression<Func<T, bool>> predicate,string sqlQuery)
+        {
+            return _repository.GetByDetailQuery(Expression<Func<T, bool>> predicate,sqlQuery);
+        }
 
         public async Task<IReadOnlyList<T>> GetAllAsync(Expression<Func<T, bool>> predicate = null,
                                       Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,

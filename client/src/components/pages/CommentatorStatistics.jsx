@@ -11,6 +11,7 @@ export default function CommentatorStatistics() {
   const getCommentators = useSelector(commentatorList);
   const getCommentatorMatchList = useSelector(commentatorMatchList);
   const [value, setValue] = useState("");
+  const [totalMatch,setTotalMatch] = useState("");
   const handleChange = (event) => setValue(event.target.value);
   useEffect( () => {
     dispatch( getCommentatorAsync());

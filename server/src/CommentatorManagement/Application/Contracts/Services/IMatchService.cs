@@ -12,6 +12,7 @@ namespace Application.Contracts.Services
     public interface IMatchService : IServiceBase<Match>
     {
         IReadOnlyList<MatchDto> GetAllDetails();
-
+        // IReadOnlyList<StatisticDto> GetAllStatistics();
+        // StatisticDto GetStatisticsByUserId(int id);
     }
 }

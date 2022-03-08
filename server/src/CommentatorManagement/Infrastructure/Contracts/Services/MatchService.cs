@@ -21,12 +21,12 @@ namespace Infrastructure.Contracts.Services
 
         public IReadOnlyList<MatchDto> GetAllDetails()
         {
-           
             var list = base.GetAllAsync();
             var returnList = _mapper.Map<IReadOnlyList<MatchDto>>(list.Result);
             var a = 10;
             return returnList;
-        
         }
+       
+        
     }
 }

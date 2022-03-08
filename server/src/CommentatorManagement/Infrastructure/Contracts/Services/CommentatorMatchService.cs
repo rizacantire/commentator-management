@@ -15,6 +15,14 @@ namespace Infrastructure.Contracts.Services
         public CommentatorMatchService(ICommentatorMatchRepository repository) : base(repository)
         {
         }
+        public CommentatorMatch GetByDetailQuery(int id)
+        {
+            var sqlQuery = "SELECT count(*) as totalMatch,sum(Homegoalcount) as homegoal,sum(Awaygoalcount) as awaygoal,sum(Totalgoalcount) as Totalgoal,sum(TeamAYellowCards) as homeYellow,sum(TeamARedCards) as homeRed,sum(TeamACardsNum) as homeTotalCard,+sum(TeamBYellowCards) as awayYellow,sum(TeamBRedCards) as awayRed,sum(TeamBCardsNum) as awayTotalCard from CommentatorMatchs inner join Matchs ON CommentatorMatchs.MatchId=Matchs.Id";
+
+            var result = base.GetByDetailQuery(predicate:u=>u.commentatorId == id,query:sqlQuery);
+
+            return result;
+        }
 
         public Task<IReadOnlyList<CommentatorMatch>> GetAllDetails()
         {

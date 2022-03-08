@@ -12,6 +12,6 @@ namespace Application.Contracts.Services
     {
         Task<IReadOnlyList<CommentatorMatch>> GetAllDetails();
         Task RemoveAsyncById(int id);
-
+        CommentatorMatch GetByDetailQuery(int id,string sqlQuery);
     }
 }
