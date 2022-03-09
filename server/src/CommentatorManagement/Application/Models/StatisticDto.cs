@@ -1,3 +1,4 @@
+using Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,5 +17,10 @@ namespace Application.Models
         public int TotalHomeWin { get; set; }
         public int TotalAwayWin { get; set; }
         public int TotalDraw { get; set; }
+        public int TotalHomeGoal { get; set; }
+        public int TotalAwayGoal { get; set; }
+
+        public List<CountDto> Counts { get; set; }
+
     }
 }

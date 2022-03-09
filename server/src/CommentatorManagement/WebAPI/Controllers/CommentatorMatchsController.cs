@@ -41,5 +41,12 @@ namespace WebAPI.Controllers
             var res = _commentatorMatchService.RemoveAsync(item);
             return Ok(res);
         }
+
+        [HttpGet]
+        [Route("GetById")]
+        public async Task<IActionResult> Get([FromQuery] int id)
+        {
+            return Ok(_commentatorMatchService.GetStatistics(id));
+        }
     }
 }

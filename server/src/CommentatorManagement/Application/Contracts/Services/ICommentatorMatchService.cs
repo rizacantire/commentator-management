@@ -1,4 +1,5 @@
 ﻿using Application.Contracts.Services.Commons;
+using Application.Models;
 using Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,7 @@ namespace Application.Contracts.Services
     {
         Task<IReadOnlyList<CommentatorMatch>> GetAllDetails();
         Task RemoveAsyncById(int id);
-        CommentatorMatch GetByDetailQuery(int id,string sqlQuery);
+        CommentatorMatch GetByDetailQuery(int id);
+        StatisticDto GetStatistics(int id);
     }
 }
