@@ -57,10 +57,16 @@ namespace Infrastructure.Contracts.Services
             var awayRedCard = filter.Sum(u => u.Match.TeamBRedCards);
             var homeYellowCard = filter.Sum(u => u.Match.TeamAYellowCards);
             var awayYellowCard = filter.Sum(u => u.Match.TeamBYellowCards);
+            var mostGoals = filter.GroupBy(u=>u.Match.Totalgoalcount).ToList();
             var homeTeams = filter.GroupBy(u => u.Match.HomeName).ToList();
             var awayTeams = filter.GroupBy(u => u.Match.AwayName).ToList();
             var countList = new List<CountDto>();
-            var a = countList.OrderBy(u => u.Count).ToList();
+            var totalGoalList = new List<TotalGoalDto>();
+
+            mostGoals.ForEach(goal =>
+            {
+                totalGoalList.Add(new TotalGoalDto(goal.Key, goal.Count()));
+            });
             filter.ForEach(u => { 
                 if(u.Match.Winningteam == u.Match.HomeId)
                 {

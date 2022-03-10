@@ -178,8 +178,20 @@ export default function CommentatorStatistics() {
             </CardContent>
           </Card><br/>
         </Grid>
+        <Grid sx={{padding:"10px"}}  item xs={3}>
+          <Card sx={{ minWidth: 300 ,bgcolor:"#FFD365"}}>
+            <CardContent>
+              <Typography gutterBottom variant="h6" component="div">
+                En Gollü Maç
+              </Typography>
+              <Typography variant="body1">
+                {getStatisticList.totalAwayGoal}
+              </Typography>
+            </CardContent>
+          </Card><br/>
+        </Grid>
        <Grid sx={{padding:"10px"}}  item xs={3}>
-          <Card sx={{ minWidth: 500 ,bgcolor:"#FFD365"}}>
+          <Card sx={{ minWidth: 300 ,bgcolor:"#FFD365",marginLeft:"75px"}}>
             <CardContent>
               <Typography gutterBottom variant="h6" component="div">
                 En Çok Maç Anlatılan Takım
