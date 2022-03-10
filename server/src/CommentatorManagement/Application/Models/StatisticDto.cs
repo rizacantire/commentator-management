@@ -20,7 +20,7 @@ namespace Application.Models
         public int TotalHomeGoal { get; set; }
         public int TotalAwayGoal { get; set; }
 
-        public List<CountDto> Counts { get; set; }
+        public CountDto MostTeam { get; set; }
 
     }
 }

@@ -109,7 +109,7 @@ namespace Infrastructure.Contracts.Services
                 TotalAwayGoal = awayGoal,
                 TotalRedCard = homeRedCard+awayRedCard,
                 TotalYellowCard = awayYellowCard+homeRedCard,
-                Counts = countList.OrderByDescending(u=>u.Count).ToList(),
+                MostTeam = countList.OrderByDescending(u=>u.Count).FirstOrDefault(),
                 TotalHomeWin = homeWinCount,
                 TotalAwayWin = awayWinCount,
                 TotalDraw = drawCount

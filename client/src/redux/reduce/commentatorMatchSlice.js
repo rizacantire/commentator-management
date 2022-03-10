@@ -6,6 +6,7 @@ export const getCommentatorMatchAsync = createAsyncThunk("api/CommentatorMatchs"
     return await response.data;
 })
 
+
 export const addCommentatorMatchAsync = createAsyncThunk("api/AddCommentatorMatch",async(data)=>{
     const response = await axios.post("https://localhost:5001/api/CommentatorMatchs",data)
     return await response.data;
@@ -48,6 +49,7 @@ export const commentatorMatchSlice = createSlice({
             const filtered = state.items.filter(item=>item.id!==id)
             state.items = filtered
         }
+       
     }
 })
 export const commentatorMatchList = (state)=> state.commentatorMatchs.items;
