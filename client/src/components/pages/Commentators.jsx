@@ -7,6 +7,9 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
+import { Grid } from '@mui/material';
+import CommentatorAddPage from './CommentatorAddPage';
+
 export default function Commentators() {
   const dispatch = useDispatch()
   const getData = useSelector(commentatorList)
@@ -25,7 +28,10 @@ export default function Commentators() {
    }, [dispatch])
   return (
     <div>
-      <TableContainer>
+      <Grid container spacing={2}>
+
+        <Grid item xs={7}>
+        <TableContainer>
         <Table>
           <TableHead>
             <TableRow>
@@ -48,6 +54,12 @@ export default function Commentators() {
           </TableBody>
         </Table>
       </TableContainer>
+        </Grid>
+        <Grid item xs={5}>
+          <CommentatorAddPage/>
+        </Grid>
+      </Grid>
+      
    
       </div>
   )

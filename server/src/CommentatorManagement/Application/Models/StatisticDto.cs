@@ -19,8 +19,8 @@ namespace Application.Models
         public int TotalDraw { get; set; }
         public int TotalHomeGoal { get; set; }
         public int TotalAwayGoal { get; set; }
-
         public CountDto MostTeam { get; set; }
+        public List<TotalGoalDto> TotalMostGoals { get; set; }
 
     }
 }

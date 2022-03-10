@@ -31,7 +31,8 @@ import {
 import {
   getCommentatorMatchAsync,
   commentatorMatchList,
-  addCommentatorMatchAsync
+  addCommentatorMatchAsync,
+  deleteCommentatorMatchAsync
 } from "../../redux/reduce/commentatorMatchSlice";
 export default function PaginationTable() {
   const [value, setValue] = React.useState("");
@@ -48,8 +49,7 @@ export default function PaginationTable() {
    dispatch( getMatchsAsync());
    dispatch( getCommentatorAsync());
    dispatch( getCommentatorMatchAsync());
-   
-  }, [dispatch]);
+  }, [dispatch,getData]);
 
   TablePaginationActions.propTypes = {
     count: PropTypes.number.isRequired,
@@ -93,6 +93,11 @@ export default function PaginationTable() {
     //window.location.reload(false);
     dispatch(await addCommentatorMatchAsync(addCommentatorMatch))
   };
+  const handleDeleteCommentator =async (event)=> {
+    // let deleteCommentatorMatch = {commentatorId: value,matchId:event }
+    dispatch(await deleteCommentatorMatchAsync(event.id))
+    console.log(event.id);
+  };
 
   
   return (
@@ -113,7 +118,7 @@ export default function PaginationTable() {
               <TableCell>Konuk Takım</TableCell>
               <TableCell>Skor</TableCell>
               <TableCell>Anlatan</TableCell>
-              <TableCell>Ekle</TableCell>
+              <TableCell>Düzenle</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -164,7 +169,9 @@ export default function PaginationTable() {
                 </TableCell>
                 <TableCell  align="left">
                   {checkCommentator(row.id) ? (
-                    ""
+                   <Button onClick={()=>handleDeleteCommentator(getCommentatorMatchs.find((r) => r.matchId === row.id))} size={"small"} variant="contained" color="error" >
+                   Sil
+                 </Button> 
                   ) : (
                     <Button onClick={()=>handleAddCommentator(row.id)} size={"small"} variant="contained" color="success" >
                       Ekle

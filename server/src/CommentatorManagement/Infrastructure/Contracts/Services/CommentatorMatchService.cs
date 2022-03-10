@@ -65,7 +65,7 @@ namespace Infrastructure.Contracts.Services
 
             mostGoals.ForEach(goal =>
             {
-                totalGoalList.Add(new TotalGoalDto(goal.Key, goal.Count()));
+                totalGoalList.Add(new TotalGoalDto(goal.Key, goal.Count(),goal));
             });
             filter.ForEach(u => { 
                 if(u.Match.Winningteam == u.Match.HomeId)
@@ -118,7 +118,9 @@ namespace Infrastructure.Contracts.Services
                 MostTeam = countList.OrderByDescending(u=>u.Count).FirstOrDefault(),
                 TotalHomeWin = homeWinCount,
                 TotalAwayWin = awayWinCount,
-                TotalDraw = drawCount
+                TotalDraw = drawCount,
+                TotalMostGoals =totalGoalList
+                
               
 
             };
