@@ -23,7 +23,6 @@ namespace Infrastructure.Contracts.Services
         {
             var list = base.GetAllAsync();
             var returnList = _mapper.Map<IReadOnlyList<MatchDto>>(list.Result);
-            var a = 10;
             return returnList;
         }
        

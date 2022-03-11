@@ -21,7 +21,8 @@ namespace Application.Mappings
 
             CreateMap<Match, CommentatorMatchDto>().ReverseMap();
             CreateMap<CommentatorMatch, CommentatorMatchDto>().ReverseMap();
-
+            CreateMap<Match, TotalGoalMatchDto>().ReverseMap();
+            CreateMap<CommentatorMatch,TotalGoalMatchDto>().ReverseMap();
 
         }
     }

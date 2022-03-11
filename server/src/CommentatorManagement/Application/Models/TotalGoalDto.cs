@@ -8,7 +8,7 @@ namespace Application.Models
 {
     public class TotalGoalDto
     {
-        public TotalGoalDto(int totalGoal, int count,IGrouping<int,CommentatorMatch> matchs)
+        public TotalGoalDto(int totalGoal, int count,List<TotalGoalMatchDto> matchs)
         {
             TotalGoal = totalGoal;
             Count = count;
@@ -17,6 +17,6 @@ namespace Application.Models
 
         public int TotalGoal { get; set; }
         public int Count { get; set; }
-        public IGrouping<int,CommentatorMatch> Matchs { get; set; }
+        public List<TotalGoalMatchDto> Matchs { get; set; }
     }
 }

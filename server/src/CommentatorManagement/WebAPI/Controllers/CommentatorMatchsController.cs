@@ -44,7 +44,7 @@ namespace WebAPI.Controllers
 
         [HttpGet]
         [Route("GetById")]
-        public async Task<IActionResult> Get([FromQuery] int id)
+        public IActionResult Get([FromQuery] int id)
         {
             return Ok(_commentatorMatchService.GetStatistics(id));
         }
