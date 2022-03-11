@@ -38,7 +38,8 @@ export default function CommentatorStatistics() {
     //console.log(getStatisticList.counts.length);
     //console.log(getStatisticList.length>0?getStatisticList.counts.length>0?getStatisticList.counts[0].teamName:"":"");
     //console.log(getStatisticList);
-    console.log(getStatisticList.counts.length>0?"a":"b");
+    //console.log(getStatisticList.counts.length>0?"a":"b");
+    console.log(getStatisticList.totalMostGoals[0].matchs.map(p=>p.matchHomeName));
   };
   return (
     <div>
@@ -179,19 +180,21 @@ export default function CommentatorStatistics() {
           </Card><br/>
         </Grid>
         <Grid sx={{padding:"10px"}}  item xs={3}>
-          <Card sx={{ minWidth: 300 ,bgcolor:"#FFD365"}}>
+          <Card sx={{ minWidth: 350 ,bgcolor:"#FFD365"}}>
             <CardContent>
               <Typography gutterBottom variant="h6" component="div">
                 En Gollü Maç
               </Typography>
               <Typography variant="body1">
-                {getStatisticList.totalAwayGoal}
+               {getStatisticList.totalMostGoals[0].matchs.map((m)=>( 
+                 <p>{m.matchHomeName} {m.matchAwayName} {m.matchHomeGoalCount} - {m.matchAwayGoalCount}</p>
+                 ))}
               </Typography>
             </CardContent>
           </Card><br/>
         </Grid>
        <Grid sx={{padding:"10px"}}  item xs={3}>
-          <Card sx={{ minWidth: 300 ,bgcolor:"#FFD365",marginLeft:"75px"}}>
+          <Card sx={{ minWidth: 300 ,bgcolor:"#FFD365",marginLeft:"95px"}}>
             <CardContent>
               <Typography gutterBottom variant="h6" component="div">
                 En Çok Maç Anlatılan Takım
