@@ -28,5 +28,12 @@ namespace WebAPI.Controllers
         {
             return Ok(await _commentatorService.AddAsync(commentator));
         }
+
+        [HttpDelete]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var item =await _commentatorService.GetByIdAsync(id);
+            return Ok(_commentatorService.RemoveAsync(item));
+        }
     }
 }

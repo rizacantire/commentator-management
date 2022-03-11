@@ -9,7 +9,11 @@ export const getCommentatorAsync = createAsyncThunk("api/Commentators",async()=>
 export const addCommentatorAsync = createAsyncThunk("api/addCommentators",async(data)=>{
     const response = await axios.post("https://localhost:5001/api/Commentators",data)
     return await response.data;
+})
 
+export const deleteCommentatorAsync = createAsyncThunk("api/deleteCommentators",async(data)=>{
+    const response = await axios.delete("https://localhost:5001/api/Commentators?id="+data)
+    return await response.data;
 })
 
 export const commentatorSlice = createSlice({
@@ -42,6 +46,12 @@ export const commentatorSlice = createSlice({
         },
         [addCommentatorAsync.fulfilled]:(state,action)=>{
             state.items.push(action.payload)
+        },
+        [deleteCommentatorAsync.fulfilled]:(state,action)=>{
+            const id = action.meta.arg;
+            const filtered = state.items.filter(item=>item.id!==id)
+            state.items = filtered
+     
         }
     }
 })

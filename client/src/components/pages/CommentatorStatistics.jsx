@@ -21,13 +21,13 @@ export default function CommentatorStatistics() {
   const dispatch = useDispatch();
   const getCommentators = useSelector(commentatorList);
   const getStatisticList = useSelector(statisticList);
-  const [value, setValue] = useState(1);
+  const [value, setValue] = useState("");
   const [totalMatch, setTotalMatch] = useState("");
   const handleChange = (event) => {
     setValue(event.target.value);
    
   };
-  //console.log(getStatisticList);
+ 
   useEffect(() => {
     dispatch(getCommentatorAsync());
     dispatch(getStatisticsAsync(value));
@@ -39,7 +39,8 @@ export default function CommentatorStatistics() {
     //console.log(getStatisticList.length>0?getStatisticList.counts.length>0?getStatisticList.counts[0].teamName:"":"");
     //console.log(getStatisticList);
     //console.log(getStatisticList.counts.length>0?"a":"b");
-    console.log(getStatisticList.totalMostGoals[0].matchs.map(p=>p.matchHomeName));
+    //console.log(getStatisticList.totalMostGoals[0].matchs.map(p=>p.matchHomeName));
+    
   };
   return (
     <div>
@@ -61,13 +62,13 @@ export default function CommentatorStatistics() {
       </Select>
       <br />
       <br />
-      <Button
+      {/* <Button
         variant="contained"
         style={{ margin: "auto 31em" }}
         onClick={getDetails}
       >
         Getir
-      </Button>
+      </Button> */}
       <br />
       <br />
       <Grid sx={{bgcolor:"#EBF9DA"}} container>
@@ -186,9 +187,12 @@ export default function CommentatorStatistics() {
                 En Gollü Maç
               </Typography>
               <Typography variant="body1">
-               {getStatisticList.totalMostGoals[0].matchs.map((m)=>( 
+                {getStatisticList.totalMostGoals !== undefined && getStatisticList.totalMostGoals.length !== 0  ?getStatisticList.totalMostGoals[0].matchs.map((m)=>( 
                  <p>{m.matchHomeName} {m.matchAwayName} {m.matchHomeGoalCount} - {m.matchAwayGoalCount}</p>
-                 ))}
+                 )):""}
+               {/* {getStatisticList.totalMostGoals[0].matchs.map((m)=>( 
+                 <p>{m.matchHomeName} {m.matchAwayName} {m.matchHomeGoalCount} - {m.matchAwayGoalCount}</p>
+                 ))} */}
               </Typography>
             </CardContent>
           </Card><br/>

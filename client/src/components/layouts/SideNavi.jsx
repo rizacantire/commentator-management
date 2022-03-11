@@ -33,7 +33,7 @@ export default function SideNavi() {
               <ListItemIcon>
                 <InboxIcon />
               </ListItemIcon>
-              <ListItemText primary="page" />
+              <ListItemText primary="Spiker Maç Detay" />
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding>
